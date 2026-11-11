@@ -1,10 +1,14 @@
-namespace DogruFatura.Core.Services;
+﻿namespace DogruFatura.Core.Services;
 
 public static class RuntimeInstallationProfile
 {
     public static bool IsDistribution => File.Exists(Path.Combine(AppContext.BaseDirectory, "distribution.profile"));
-    public static string RootDirectory => GetRoot(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), IsDistribution);
-    public static string GetRoot(string desktop, bool distribution) => Path.Combine(desktop, distribution ? "DoğruFatura - Dağıtım" : "DoğruFatura");
+    public static string RootDirectory => GetRoot(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), false);
+    public static string GetRoot(string desktop, bool distribution)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(desktop);
+        return Path.Combine(Path.GetFullPath(desktop), distribution ? "DoğruFatura - Dağıtım" : "DoğruFatura");
+    }
 }
 
 public static class InitialSetupNotice

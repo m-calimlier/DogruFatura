@@ -1,4 +1,4 @@
-param([string]$DataRoot = '', [string]$OutputFolder = '', [string]$PayloadFolder = '')
+﻿param([string]$CompilerPath = '', [string]$DataRoot = '', [string]$OutputFolder = '', [string]$PayloadFolder = '')
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $buildProps = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'Directory.Build.props') -Raw)
@@ -52,12 +52,8 @@ $activeDoc = Get-Content -LiteralPath (Join-Path $seedData 'AktifFaturalar.json'
 $signatureDoc = Get-Content -LiteralPath (Join-Path $seedData 'YetkiliProfili.json') -Raw | ConvertFrom-Json
 foreach ($required in 'DogruFatura.exe','DogruFatura.Core.dll','coreclr.dll','PresentationFramework.dll') { if (!(Test-Path (Join-Path $payload $required))) { throw "Eksik dosya: $required" } }
 if (Test-Path (Join-Path $payload 'InitialData')) { throw 'Ortak yayın klasöründe başlangıç verisi olmamalı.' }
-$compiler = @("${env:ProgramFiles(x86)}/NSIS/makensis.exe", "$env:ProgramFiles/NSIS/makensis.exe") | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
-if (!$compiler) { throw 'NSIS bulunamadı.' }
-$templateSource = Join-Path $projectRoot 'Kurulum/DogruFatura_Variants.nsi'
-$template = Join-Path $stageRoot 'DogruFatura_Variants.nsi'
-[IO.File]::WriteAllText($template, (Get-Content -LiteralPath $templateSource -Raw -Encoding utf8), [Text.UTF8Encoding]::new($true))
-$icon = Join-Path $projectRoot 'DogruFatura.Wpf/Assets/AppIcon.ico'
+if (!$CompilerPath) { $CompilerPath = @("${env:ProgramFiles(x86)}/Inno Setup 6/ISCC.exe", "$env:LOCALAPPDATA/Programs/Inno Setup 6/ISCC.exe") | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1 }
+if (!$CompilerPath) { throw 'Inno Setup 6.6+ bulunamadı; -CompilerPath belirtin.' }
 $variants = @(
   @{ Code='TAM_VERILI_KISISEL'; Title='Tam Verili - Kişisel Kurulum'; Personal='1'; Short='KİŞİSEL KURULUM'; Body='Okullar, imzacılar, faturalar ve PDF arşivi dahildir. Mevcut kayıtlarınız korunur.' },
   @{ Code='TEMIZ_VERISIZ_DAGITIM'; Title='Temiz Verisiz - Dağıtım Kurulumu'; Personal='0'; Short='TEMİZ DAĞITIM KURULUMU'; Body='Ayrı ve boş bir veri alanıyla başlar. İlk kullanımda kurum ve imzacıları tanımlayın.' }
@@ -65,8 +61,10 @@ $variants = @(
 $manifest = @()
 foreach ($variant in $variants) {
   $target = Join-Path $OutputFolder ('DogruFatura_' + $version + '_' + $variant.Code + '_x64_Setup.exe')
-  & $compiler /V2 "/DVERSION=$version" "/DVARIANTTITLE=$($variant.Title)" "/DVARIANTSHORT=$($variant.Short)" "/DVARIANTBODY=$($variant.Body)" "/DPERSONAL=$($variant.Personal)" "/DPAYLOAD=$payload" "/DSEEDROOT=$seedFolder" "/DAPPICON=$icon" "/DARTWORK=$(Join-Path $projectRoot 'Kurulum/Assets')" "/DOUTPUTEXE=$target" $template
-  if ($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath $target)) { throw 'NSIS başarısız.' }
+  $compileArgs = @('/Qp', "/DAppVersion=$version", "/DPayloadDir=$payload", "/O$OutputFolder", ('/F' + [IO.Path]::GetFileNameWithoutExtension($target)))
+  if ($variant.Personal -eq '1') { $compileArgs += "/DPersonalSeedDir=$seedFolder" }
+  & $CompilerPath @compileArgs (Join-Path $projectRoot 'installer/DogruFatura.iss')
+  if ($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath $target)) { throw 'Inno Setup başarısız.' }
   $personal = $variant.Personal -eq '1'
   $manifest += [pscustomobject]@{File=(Split-Path $target -Leaf);Title=$variant.Title;SHA256=(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash;Bytes=(Get-Item -LiteralPath $target).Length;Personal=$personal;Schools=if($personal){$schoolsDocument.Data.Count}else{0};Invoices=if($personal){@($activeDoc.Data).Count}else{0};Archives=if($personal){@($archiveDoc.Data).Count}else{0};ArchivedInvoices=if($personal){($archiveDoc.Data | ForEach-Object { $_.Invoices.Count } | Measure-Object -Sum).Sum}else{0};PrivateSignatures=if($personal){![string]::IsNullOrEmpty($signatureDoc.Data.RealizationOfficerName)}else{$false};Signed=$false}
 }
@@ -75,8 +73,8 @@ $manifest | ForEach-Object { $_.SHA256 + '  ' + $_.File } | Set-Content -Literal
 @'
 TAM_VERILI_KISISEL: Okullar, imzacılar, aktif faturalar, işlem arşivi, ayarlar, işlem geçmişi ve PDF belgeleri dahildir. Kişisel kullanım içindir.
 TEMIZ_VERISIZ_DAGITIM: Başkasına göndermek içindir. İlk kurulumda okul, fatura, arşiv ve imza kaydı bulunmaz.
-İki sürüm aynı bilgisayarda kurulabilir. Dağıtımın verileri Masaüstü/DoğruFatura - Dağıtım, kişisel veriler Masaüstü/DoğruFatura altında tutulur. Eski kişisel kayıtlar dağıtıma aktarılmaz.
-Mevcut veri dosyaları iki kurulumda da korunur; temiz kurulum var olan kayıtları silmez.
+İki paket de Masaüstü/DoğruFatura ana klasörünü kullanır. Kişisel paket özel başlangıç verileri içerir; paylaşım paketi kişisel veri içermez.
+Normal kurulum mevcut verileri korur. Temiz kurulum ayrıca seçilir ve açık onaydan sonra eski kayıtları siler.
 SÜRÜM: Kurulum dosyasının adında belirtilen program sürümü kurulur.
 Windows 10/11 x64; .NET/Excel/Visual Studio gerekmez. Kurulum geçerli kullanıcı hesabına yapılır.
 Paketler dijital olarak imzalı değildir; Windows yayıncı uyarısı gösterebilir.

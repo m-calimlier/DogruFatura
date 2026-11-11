@@ -1,4 +1,4 @@
-using DogruFatura.Core.Models;
+﻿using DogruFatura.Core.Models;
 using DogruFatura.Core.Services;
 using System.IO;
 using System.IO.Compression;
@@ -200,7 +200,7 @@ public sealed class ApplicationSafetyService
         if (string.IsNullOrWhiteSpace(zipPath) || !File.Exists(zipPath))
             return new SafetyRestoreResult(false, "Seçilen yedek dosyası bulunamadı.", null);
 
-        var tempRoot = Path.Combine(Path.GetTempPath(), "DogruFatura_Restore_" + Guid.NewGuid().ToString("N"));
+        var tempRoot = Path.Combine(RootFolder, "Calisma", "DogruFatura_Restore_" + Guid.NewGuid().ToString("N"));
         var extractedRoot = Path.Combine(tempRoot, "Extracted");
         Directory.CreateDirectory(extractedRoot);
 

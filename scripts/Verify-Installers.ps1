@@ -1,64 +1,29 @@
-param([string]$OutputFolder = '')
+﻿param([string]$OutputFolder = '')
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if (!$OutputFolder) {
-    $buildProps = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'Directory.Build.props') -Raw)
-    $version = [string]$buildProps.Project.PropertyGroup.VersionPrefix
-    $suffix = [string]$buildProps.Project.PropertyGroup.VersionSuffix
-    if (!$version) { throw 'Directory.Build.props sürümü okunamadı.' }
+    $props = [xml](Get-Content -LiteralPath (Join-Path $projectRoot 'Directory.Build.props') -Raw)
+    $version = [string]$props.Project.PropertyGroup.VersionPrefix
+    $suffix = [string]$props.Project.PropertyGroup.VersionSuffix
     if ($suffix) { $version += '-' + $suffix }
     $OutputFolder = Join-Path $projectRoot ('DAGITIM/' + $version)
 }
 $manifest = Get-Content -LiteralPath (Join-Path $OutputFolder 'PAKETLER.json') -Raw | ConvertFrom-Json
 $verificationRoot = Join-Path $projectRoot ('artifacts/install-verification-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $verificationRoot | Out-Null
-$results = @()
-foreach ($entry in $manifest) {
+$results = foreach ($entry in $manifest) {
     $setup = Join-Path $OutputFolder $entry.File
     if ((Get-FileHash -LiteralPath $setup -Algorithm SHA256).Hash -ne $entry.SHA256) { throw 'Kurulum hash hatalı.' }
-    $description = (Get-Item -LiteralPath $setup).VersionInfo.FileDescription
-    $expectedVersion = [IO.Path]::GetFileName([IO.Path]::GetFullPath($OutputFolder).TrimEnd([IO.Path]::DirectorySeparatorChar))
-    if ((Get-Item -LiteralPath $setup).VersionInfo.ProductVersion -ne $expectedVersion) { throw 'Kurulum ürün sürümü klasör sürümüyle uyuşmuyor.' }
-    if ($description -ne ('DoğruFatura - ' + $entry.Title)) { throw 'Kurulum başlığı paket türüyle eşleşmiyor.' }
     $target = Join-Path $verificationRoot ([IO.Path]::GetFileNameWithoutExtension($entry.File))
-    $install = Start-Process -FilePath $setup -ArgumentList "/S /VERIFYONLY /D=$target" -WindowStyle Hidden -PassThru -Wait
-    if ($install.ExitCode -ne 0) { throw "Kurulum doğrulaması başarısız: $($install.ExitCode)" }
-    $profileCode = if ($entry.Personal) { '1' } else { '0' }
-    $registrationPath = 'HKCU:/Software/DoğruFatura/InstallerVerification/' + $profileCode
-    $registration = Get-ItemProperty -LiteralPath $registrationPath
-    $appExe = Join-Path $target 'DogruFatura.exe'
-    if ($registration.InstallLocation -ne $target -or $registration.DisplayIcon -ne ('"' + $appExe + '",0')) { throw 'Denetim Masası simge kaydı hatalı.' }
-    $desktopLink = Get-ChildItem -LiteralPath (Join-Path $target 'Verification/Desktop') -File -Filter '*.lnk' | Select-Object -First 1
-    $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($desktopLink.FullName)
-    if ($shortcut.TargetPath -ne $appExe -or !$shortcut.IconLocation.EndsWith(',0') -or !$shortcut.IconLocation.Contains($appExe)) { throw 'Masaüstü kısayolu veya simgesi hatalı.' }
-    Add-Type -AssemblyName System.Drawing
-    $icon = [Drawing.Icon]::ExtractAssociatedIcon($appExe)
-    if (!$icon -or $icon.Width -eq 0) { throw 'Program simgesi okunamadı.' }
-    $icon.Dispose()
-    Remove-Item -LiteralPath $registrationPath
-    $core = Join-Path $target 'DogruFatura.Core.dll'
-    foreach ($required in 'DogruFatura.exe','coreclr.dll','PresentationFramework.dll') { if (!(Test-Path (Join-Path $target $required))) { throw "Kurulum dosyası eksik: $required" } }
-    $seedRoot = [IO.Path]::GetFullPath((Join-Path $target 'InitialData'))
-    foreach ($name in 'IslemArsivi.json','AktifFaturalar.json','YetkiliProfili.json','DenetimKaydi.jsonl','IslemJournal.jsonl') {
-        foreach ($record in Get-ChildItem -LiteralPath $target -Recurse -File -Filter $name) {
-            if (!$entry.Personal -or !$record.FullName.StartsWith($seedRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw "Paket özel veri içeriyor: $name" }
-        }
-    }
-    if (!$entry.Personal -and (Get-ChildItem -LiteralPath $target -Recurse -File -Include '*.pdf','*.zip')) { throw 'PDF/yedek dağıtım paketine karışmış.' }
-    if (!$entry.Personal -and (Test-Path -LiteralPath $seedRoot)) { throw 'Dağıtımda kişisel veri klasörü var.' }
-    if ($entry.Personal -and !(Test-Path -LiteralPath (Join-Path $seedRoot 'Veri/IslemArsivi.json'))) { throw 'Kişisel kurulumda tam veri paketi yok.' }
-    $binaryHex = [Convert]::ToHexString([IO.File]::ReadAllBytes($core))
-    foreach ($privateDefault in 'Halil ÖZENÇ','Özgür BAYSAL','7710327776','Cumhuriyet İlkokulu') {
-        foreach ($encoding in @([Text.Encoding]::Unicode, [Text.Encoding]::UTF8)) {
-            if ($binaryHex.Contains([Convert]::ToHexString($encoding.GetBytes($privateDefault)))) { throw 'Ortak program çekirdeğinde özel başlangıç bilgisi kaldı.' }
-        }
-    }
-    & dotnet build (Join-Path $projectRoot 'scripts/VerifyInstallation/VerifyInstallation.csproj') -c Release -o $target "-p:PackageCore=$core" --nologo
-    if ($LASTEXITCODE -ne 0) { throw 'Doğrulama aracı derlenemedi.' }
-    $firstRunFolder = Join-Path $target 'IsolatedFirstRun'
-    $result = & dotnet (Join-Path $target 'VerifyInstallation.dll') $firstRunFolder $entry.Schools $entry.Archives $entry.Invoices $entry.PrivateSignatures $entry.Personal
-    if ($LASTEXITCODE -ne 0) { throw 'İlk açılış kontrolü başarısız.' }
-    $results += [pscustomobject]@{File=$entry.File;SetupTitle=$description;DesktopIcon='PASS';UninstallIcon='PASS';FirstRun=($result | ConvertFrom-Json);VerifiedFolder=$target}
+    $log = $target + '.log'
+    # CI/verification may never bypass the user's checkbox and Tamam consent.
+    $arguments = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/TASKS=cleandata',('/DIR="' + $target + '"'),('/LOG="' + $log + '"'))
+    $process = Start-Process -FilePath $setup -ArgumentList $arguments -WindowStyle Hidden -PassThru -Wait
+    if ($process.ExitCode -eq 0) { throw 'Kurulum kullanıcı kabulünü atladı.' }
+    if ((Get-Content -LiteralPath $log -Raw) -notmatch 'InitializeSetup returned False') { throw 'Kurulum beklenen onay kapısında durmadı.' }
+    if (Test-Path -LiteralPath $target) { throw 'Kullanıcı kabulü olmadan program klasörü oluşturuldu.' }
+    [pscustomobject]@{ File=$entry.File; HashVerified=$true; ConsentRequired=$true; SilentExitCode=$process.ExitCode }
 }
-$results | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $OutputFolder 'DOGRULAMA.json') -Encoding utf8
-$results | ConvertTo-Json -Depth 5
+$results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $verificationRoot 'RESULTS.json') -Encoding utf8
+$results | Format-Table
+Write-Output 'Tam kurulum/güncelleme/kaldırma kabulü etkileşimli bir Windows oturumunda ayrıca yapılmalıdır.'

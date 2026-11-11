@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using DogruFatura.Core.Services;
 using System.IO;
 using System.Reflection;
@@ -30,18 +30,7 @@ internal static class ApplicationCrashLogger
         }
         catch
         {
-            try
-            {
-                var fallbackFolder = Path.Combine(Path.GetTempPath(), "DoğruFatura", "Loglar");
-                Directory.CreateDirectory(fallbackFolder);
-                var fallbackPath = CreateUniqueLogPath(fallbackFolder);
-                File.WriteAllText(fallbackPath, content, new UTF8Encoding(false));
-                return fallbackPath;
-            }
-            catch
-            {
-                return "Hata kaydı dosyaya yazılamadı.";
-            }
+            return "Masaüstü veri klasörüne hata kaydı yazılamadı.";
         }
     }
 

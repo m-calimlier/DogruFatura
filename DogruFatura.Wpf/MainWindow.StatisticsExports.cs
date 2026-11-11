@@ -1,4 +1,4 @@
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using DogruFatura.Core.Models;
 using DogruFatura.Core.Services;
 using Microsoft.Win32;
@@ -34,7 +34,7 @@ public partial class MainWindow
         if (!TryGetStatisticsResult(out var result))
             return;
 
-        var dialog = new SaveFileDialog
+        var dialog = new WorkspaceSaveFileDialog
         {
             Title = "İstatistik Excel çıktısını kaydet",
             Filter = "Excel çalışma kitabı (*.xlsx)|*.xlsx",
@@ -162,7 +162,7 @@ public partial class MainWindow
         if (!TryGetStatisticsResult(out var result))
             return;
 
-        var dialog = new SaveFileDialog
+        var dialog = new WorkspaceSaveFileDialog
         {
             Title = "İstatistik PDF raporunu kaydet",
             Filter = "PDF dosyası (*.pdf)|*.pdf",
