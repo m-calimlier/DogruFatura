@@ -11,6 +11,7 @@ AppName=DoğruFatura
 AppVersion={#AppVersion}
 VersionInfoVersion={#AppVersion}.0
 AppPublisher=Murat ÇALIMLIER
+AppPublisherURL=https://github.com/m-calimlier/DogruFatura
 DefaultDirName={localappdata}\Programs\DoğruFatura
 DefaultGroupName=DoğruFatura
 PrivilegesRequired=lowest
