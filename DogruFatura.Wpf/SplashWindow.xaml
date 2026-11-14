@@ -7,70 +7,80 @@
         MaxHeight="{Binding Height, Source={x:Static SystemParameters.WorkArea}}"
         WindowStartupLocation="CenterScreen" Background="#08162B" FontFamily="Segoe UI"
         ShowInTaskbar="True" UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Window.Resources>
+        <SolidColorBrush x:Key="StagePending" Color="#42658C"/>
+        <SolidColorBrush x:Key="StageDone" Color="#76E8F3"/>
+        <SolidColorBrush x:Key="StageActive" Color="#FFD552"/>
+        <LinearGradientBrush x:Key="Gold" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFE27A" Offset="0"/>
+            <GradientStop Color="#FFBF24" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Resources>
     <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
         <Grid Width="460" Height="585" Background="#08162B" ClipToBounds="True">
-            <Border Margin="18" CornerRadius="17" BorderThickness="1" BorderBrush="#CDAA60">
+            <Border Margin="18" CornerRadius="16" BorderThickness="1" BorderBrush="{StaticResource Gold}">
                 <Border.Background>
-                    <RadialGradientBrush Center=".42,.23" GradientOrigin=".42,.23" RadiusX=".72" RadiusY=".82">
-                        <GradientStop Color="#172C49" Offset="0"/>
-                        <GradientStop Color="#0D1C33" Offset=".53"/>
-                        <GradientStop Color="#08162B" Offset="1"/>
+                    <RadialGradientBrush Center=".48,.44" GradientOrigin=".48,.44" RadiusX=".67" RadiusY=".66">
+                        <GradientStop Color="#133153" Offset="0"/>
+                        <GradientStop Color="#0A1D3B" Offset=".65"/>
+                        <GradientStop Color="#071529" Offset="1"/>
                     </RadialGradientBrush>
                 </Border.Background>
             </Border>
-
             <Canvas IsHitTestVisible="False">
-                <Path Fill="#105D83AC" Data="M19,117 C43,75 80,43 135,19 H177 C99,46 49,82 19,134 Z"/>
-                <Path Fill="#105D83AC" Data="M441,463 C418,509 373,544 319,566 H284 C357,545 410,515 441,446 Z"/>
-                <Path Stroke="#5BCDAA60" StrokeThickness="1"
-                      Data="M20,117 C47,71 90,36 135,19 M441,463 C414,513 370,547 318,566"/>
-                <Ellipse Width="80" Height="80" Canvas.Left="28" Canvas.Top="44">
-                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#29E8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                <Ellipse Width="400" Height="150" Canvas.Left="30" Canvas.Top="155">
+                    <Ellipse.RenderTransform><RotateTransform Angle="-24" CenterX="200" CenterY="75"/></Ellipse.RenderTransform>
+                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#354A9BD1" Offset="0"/><GradientStop Color="#004A9BD1" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Width="80" Height="80" Canvas.Left="359" Canvas.Top="475">
-                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#23E8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                <Ellipse Width="88" Height="88" Canvas.Left="330" Canvas.Top="60">
+                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#22FFD552"/><GradientStop Color="#00FFD552" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Width="88" Height="88" Canvas.Left="25" Canvas.Top="377">
+                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#22FFD552"/><GradientStop Color="#00FFD552" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                </Ellipse>
+                <Path Stroke="#D6B24F" StrokeThickness="1.4" Data="M369,105 H379 M374,100 V110 M64,421 H74 M69,416 V426"/>
             </Canvas>
-
-            <StackPanel VerticalAlignment="Top" Margin="0,49,0,0">
-                <Image Source="Assets/AppIcon_512.png" Width="76" Height="76"/>
-                <TextBlock TextAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="#F3F5F8" Margin="0,9,0,0">
-                    <Run Text="Doğru"/><Run Text="Fatura" Foreground="#E8B84F"/>
+            <StackPanel VerticalAlignment="Top" Margin="0,46,0,0">
+                <Image Source="Assets/AppIcon_512.png" Width="64" Height="64">
+                    <Image.Effect><DropShadowEffect Color="#2495CF" BlurRadius="15" ShadowDepth="0" Opacity=".55"/></Image.Effect>
+                </Image>
+                <TextBlock TextAlignment="Center" FontSize="29" FontWeight="Bold" Foreground="#F3F5F8" Margin="0,6,0,0">
+                    <Run Text="Doğru"/><Run Text="Fatura" Foreground="{StaticResource Gold}"/>
                 </TextBlock>
             </StackPanel>
-
-            <Grid Width="136" Height="136" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Ellipse Margin="6" Fill="#091529" Stroke="#38516F" StrokeThickness="6"/>
-                <Path x:Name="ProgressArc" Stroke="#E8B84F" StrokeThickness="6" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                <Ellipse x:Name="CompletedRing" Visibility="Collapsed" Margin="6" Stroke="#E8B84F" StrokeThickness="6"/>
-                <TextBlock x:Name="PercentText" Text="%0" FontSize="34" FontWeight="Bold" Foreground="#E8B84F"
+            <Canvas Width="26" Height="106" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,161,0,0" IsHitTestVisible="False">
+                <Path Stroke="#52769B" StrokeThickness="1.5" Data="M13,25 V39 M13,65 V79"/>
+                <Ellipse x:Name="StageOne" Width="22" Height="22" Canvas.Left="2" Canvas.Top="1" Fill="#142E4D" Stroke="{StaticResource StagePending}" StrokeThickness="1.6"/>
+                <Ellipse x:Name="StageTwo" Width="22" Height="22" Canvas.Left="2" Canvas.Top="41" Fill="#142E4D" Stroke="{StaticResource StagePending}" StrokeThickness="1.6"/>
+                <Ellipse x:Name="StageThree" Width="22" Height="22" Canvas.Left="2" Canvas.Top="81" Fill="#142E4D" Stroke="{StaticResource StagePending}" StrokeThickness="1.6"/>
+                <Path x:Name="StageOneCheck" Stroke="{StaticResource StageDone}" StrokeThickness="2" Data="M8,12 L12,16 18,9" Visibility="Collapsed"/>
+                <Path x:Name="StageTwoCheck" Stroke="{StaticResource StageDone}" StrokeThickness="2" Data="M8,52 L12,56 18,49" Visibility="Collapsed"/>
+                <Path x:Name="StageThreeCheck" Stroke="{StaticResource StageDone}" StrokeThickness="2" Data="M8,92 L12,96 18,89" Visibility="Collapsed"/>
+                <Ellipse x:Name="ActiveStageDot" Width="9" Height="9" Canvas.Left="8.5" Canvas.Top="7.5" Fill="{StaticResource StageActive}">
+                    <Ellipse.Effect><DropShadowEffect Color="#FFC52C" ShadowDepth="0" BlurRadius="12" Opacity=".9"/></Ellipse.Effect>
+                </Ellipse>
+            </Canvas>
+            <Grid Width="120" Height="120" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,277,0,0">
+                <Ellipse Margin="6" Fill="#08182F"/>
+                <Path x:Name="ProgressTrack" Stroke="#476C93" StrokeThickness="6"/>
+                <Path x:Name="ProgressArc" Stroke="{StaticResource Gold}" StrokeThickness="6">
+                    <Path.Effect><DropShadowEffect Color="#FFD04A" BlurRadius="12" ShadowDepth="0" Opacity=".52"/></Path.Effect>
+                </Path>
+                <TextBlock x:Name="PercentText" Text="%0" FontSize="31" FontWeight="Bold" Foreground="{StaticResource Gold}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
-            <TextBlock x:Name="StageText" Text="Bileşenler hazırlanıyor..." VerticalAlignment="Center"
-                       Margin="32,173,32,0" Foreground="#B2C4D8" FontSize="14" TextAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock x:Name="StageText" Text="Bileşenler hazırlanıyor..." VerticalAlignment="Top"
+                       Margin="27,406,27,0" Foreground="#F3F5F8" FontSize="14" TextAlignment="Center" TextWrapping="Wrap"/>
 
-            <Grid Width="280" Height="88" VerticalAlignment="Bottom" Margin="0,0,0,53">
-                <Path Data="M17,1 H263 L279,17 V71 L263,87 H17 L1,71 V17 Z"
-                      Fill="#0A172B" Stroke="#CDAA60" StrokeThickness="1.2">
-                    <Path.Effect><DropShadowEffect Color="#000000" BlurRadius="13" ShadowDepth="3" Opacity=".32"/></Path.Effect>
-                </Path>
-                <Rectangle Width="116" Height="16" VerticalAlignment="Top" Margin="0,-7,0,0" IsHitTestVisible="False">
-                    <Rectangle.Fill><RadialGradientBrush><GradientStop Color="#4CE8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Rectangle.Fill>
-                </Rectangle>
+            <Border Width="292" Height="80" VerticalAlignment="Bottom" Margin="0,0,0,44" CornerRadius="12"
+                    Background="#09192F" BorderBrush="{StaticResource Gold}" BorderThickness="1">
                 <StackPanel VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Border Width="25" Height="1" Background="#6F6045" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                        <TextBlock Text="Created by" Foreground="#DAB66B" FontSize="12" FontWeight="SemiBold"/>
-                        <Border Width="25" Height="1" Background="#6F6045" Margin="8,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <TextBlock Text="Murat ÇALIMLIER" FontSize="23" FontWeight="Bold" Foreground="#E8B84F"
-                               TextAlignment="Center" Margin="0,2,0,4"/>
-                    <Border HorizontalAlignment="Center" CornerRadius="9" Padding="10,1" Background="#1C304C"
-                            BorderBrush="#776443" BorderThickness="1">
-                        <TextBlock x:Name="VersionText" Foreground="#A5B9D0" FontSize="10" FontWeight="SemiBold"/>
-                    </Border>
+                    <TextBlock Text="Created by" Foreground="{StaticResource Gold}" FontSize="12" FontWeight="Bold" TextAlignment="Center"/>
+                    <TextBlock Text="Murat ÇALIMLIER" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Gold}"
+                               TextAlignment="Center" Margin="0,3,0,6"/>
+                    <TextBlock x:Name="VersionText" Foreground="#9AB3CD" FontSize="12" TextAlignment="Center"/>
                 </StackPanel>
-            </Grid>
+            </Border>
         </Grid>
     </Viewbox>
 </Window>

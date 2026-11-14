@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -7,8 +8,9 @@ namespace DogruFatura.Wpf;
 
 public partial class SplashWindow : Window
 {
-    private const double RingCenter = 68;
-    private const double RingRadius = 59;
+    private const double RingCenter = 60;
+    private const double RingRadius = 54;
+    private const int SegmentCount = 28;
     private readonly Stopwatch _visibleStopwatch = new();
     private DispatcherTimer? _percentTimer;
     private bool _completionStarted;
@@ -24,6 +26,7 @@ public partial class SplashWindow : Window
     private void SplashWindow_Loaded(object sender, RoutedEventArgs e)
     {
         VersionText.Text = AppVersionInfo.DisplayVersion;
+        ProgressTrack.Data = CreateRing(100);
         SetProgress(0);
         _visibleStopwatch.Start();
         _percentTimer = new DispatcherTimer(
@@ -36,25 +39,48 @@ public partial class SplashWindow : Window
 
     private void SetProgress(int percent)
     {
+        if (percent == _percent) return;
         _percent = percent;
         PercentText.Text = $"%{percent}";
-        CompletedRing.Visibility = percent == 100 ? Visibility.Visible : Visibility.Collapsed;
-        if (percent is 0 or 100)
-        {
-            ProgressArc.Data = null;
-            return;
-        }
+        ProgressArc.Data = CreateRing(percent);
+    }
 
-        var angle = percent * 2 * Math.PI / 100;
-        var end = new Point(RingCenter + RingRadius * Math.Sin(angle), RingCenter - RingRadius * Math.Cos(angle));
+    private static StreamGeometry CreateRing(int percent)
+    {
         var geometry = new StreamGeometry();
         using (var context = geometry.Open())
         {
-            context.BeginFigure(new Point(RingCenter, RingCenter - RingRadius), false, false);
-            context.ArcTo(end, new Size(RingRadius, RingRadius), 0, percent > 50, SweepDirection.Clockwise, true, false);
+            var segmentAngle = 2 * Math.PI / SegmentCount;
+            var progressAngle = percent * 2 * Math.PI / 100;
+            for (var index = 0; index < SegmentCount; index++)
+            {
+                var start = index * segmentAngle + .013;
+                if (start >= progressAngle) break;
+                var end = Math.Min(progressAngle, (index + 1) * segmentAngle - .013);
+                context.BeginFigure(PointOnRing(start), false, false);
+                context.ArcTo(PointOnRing(end), new Size(RingRadius, RingRadius), 0, false, SweepDirection.Clockwise, true, false);
+            }
         }
         geometry.Freeze();
-        ProgressArc.Data = geometry;
+        return geometry;
+    }
+
+    private static Point PointOnRing(double angle) =>
+        new(RingCenter + RingRadius * Math.Sin(angle), RingCenter - RingRadius * Math.Cos(angle));
+
+    private void SetStages(int activeStage)
+    {
+        var pending = (Brush)FindResource("StagePending");
+        var done = (Brush)FindResource("StageDone");
+        var active = (Brush)FindResource("StageActive");
+        StageOne.Stroke = activeStage > 0 ? done : active;
+        StageTwo.Stroke = activeStage == 1 ? active : activeStage > 1 ? done : pending;
+        StageThree.Stroke = activeStage == 2 ? active : activeStage > 2 ? done : pending;
+        StageOneCheck.Visibility = activeStage > 0 ? Visibility.Visible : Visibility.Collapsed;
+        StageTwoCheck.Visibility = activeStage > 1 ? Visibility.Visible : Visibility.Collapsed;
+        StageThreeCheck.Visibility = activeStage > 2 ? Visibility.Visible : Visibility.Collapsed;
+        ActiveStageDot.Visibility = activeStage == 3 ? Visibility.Collapsed : Visibility.Visible;
+        Canvas.SetTop(ActiveStageDot, 7.5 + 40 * activeStage);
     }
 
     private void UpdateProgressText()
@@ -63,6 +89,7 @@ public partial class SplashWindow : Window
 
         var elapsed = _visibleStopwatch.ElapsedMilliseconds;
         SetProgress(StartupProgressProfile.CalculateContinuousPercent(elapsed));
+        SetStages(elapsed < 1700 ? 0 : elapsed < 3400 ? 1 : 2);
         StageText.Text = elapsed switch
         {
             < 1700 => "Bileşenler hazırlanıyor...",
@@ -90,6 +117,7 @@ public partial class SplashWindow : Window
         }
 
         SetProgress(100);
+        SetStages(3);
         await Task.Delay(80);
         Close();
     }
