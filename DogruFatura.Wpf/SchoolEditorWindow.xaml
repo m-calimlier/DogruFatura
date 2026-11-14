@@ -10,7 +10,7 @@
             <TextBlock x:Name="EditorHeading" Text="Yeni Kurum Kaydı" Foreground="#E8C778" FontSize="21" FontWeight="SemiBold"/>
             <TextBlock Text="Bilgiler yalnız Kaydet ile kalıcı kayda aktarılır." Foreground="#B9CBDA" FontSize="13" Margin="0,6,0,0" TextWrapping="Wrap"/>
         </StackPanel>
-        <Border Grid.Row="1" Style="{StaticResource PaymentMetricCard}" Padding="18">
+        <HeaderedContentControl Grid.Row="1" Header="Kurum Bilgileri" Tag="{StaticResource SchoolCardIcon}" Style="{StaticResource InsetFormCard}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid Margin="0,0,8,0">
                     <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="16"/><ColumnDefinition/></Grid.ColumnDefinitions>
@@ -31,7 +31,7 @@
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
-        </Border>
+        </HeaderedContentControl>
         <StackPanel Grid.Row="2" Margin="0,12,0,0">
             <TextBlock x:Name="ErrorText" Foreground="#FFB4AD" FontSize="13" TextWrapping="Wrap" Visibility="Collapsed" Margin="0,0,0,10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

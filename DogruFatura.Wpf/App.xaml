@@ -57,6 +57,69 @@
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="16,14"/>
         </Style>
+        <!-- Inset shells and icon plates follow the Ek Ders payment workspace. -->
+        <SolidColorBrush x:Key="MetricGold" Color="#E8C778"/>
+        <DrawingImage x:Key="InvoiceCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M6,2 H20 L27,9 V30 H6 Z M20,2 V9 H27 M11,14 H22 M11,19 H22 M11,24 H18"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="CalculatorCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M5,2 H27 V30 H5 Z M9,6 H23 V12 H9 Z M10,17 H13 M19,17 H22 M10,22 H13 M19,22 H22 M10,26 H13 M19,26 H22"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="HomeCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M2,15 L16,3 30,15 M6,13 V29 H26 V13 M12,29 V20 H20 V29"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="SignatureCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M4,26 H28 M7,22 L10,13 24,3 29,8 15,20 Z M21,6 L26,11"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="ListCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M9,5 H29 M9,12 H29 M9,19 H29 M9,26 H29 M3,5 H5 M3,12 H5 M3,19 H5 M3,26 H5"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="SchoolCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M2,11 L16,3 30,11 Z M5,14 H27 M8,14 V26 M16,14 V26 M24,14 V26 M3,29 H29"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="ArchiveCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M3,4 H29 V11 H3 Z M6,11 V29 H26 V11 M12,17 H20"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="ChartCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M3,3 V29 H30 M8,24 V16 H12 V24 Z M16,24 V11 H20 V24 Z M24,24 V5 H28 V24 Z"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="ShieldCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M16,2 L28,6 V16 Q27,25 16,30 Q5,25 4,16 V6 Z M10,16 L14,20 22,11"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="SettingsCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M5,7 H27 M5,16 H27 M5,25 H27 M12,4 V10 M21,13 V19 M10,22 V28"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="TransferCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M3,10 H28 M22,4 L28,10 22,16 M29,23 H4 M10,17 L4,23 10,29"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="StampCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M5,28 H27 M7,22 H25 V25 H7 Z M11,22 V18 Q14,16 13,12 L12,7 Q12,3 16,3 Q20,3 20,7 L19,12 Q18,16 21,18 V22"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="ClockCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M16,2 A14,14 0 1 1 15.99,2 M16,7 V16 L22,20"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="AlertCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M16,3 L30,28 H2 Z M16,11 V19 M16,23 V24"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="CoinsCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M3,8 C3,2 29,2 29,8 C29,14 3,14 3,8 M3,8 V22 C3,29 29,29 29,22 V8 M3,15 C3,22 29,22 29,15"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="PagesCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M10,2 H27 V25 M5,7 H22 V30 H5 Z M9,13 H18 M9,18 H18 M9,23 H16"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <DrawingImage x:Key="TagCardIcon"><DrawingImage.Drawing><GeometryDrawing Geometry="M3,5 H16 L29,18 18,29 3,14 Z M9,10 A2,2 0 1 1 8.99,10"><GeometryDrawing.Pen><Pen Brush="{StaticResource MetricGold}" Thickness="1.65" LineJoin="Round" StartLineCap="Round" EndLineCap="Round"/></GeometryDrawing.Pen></GeometryDrawing></DrawingImage.Drawing></DrawingImage>
+        <Style x:Key="InsetCardShell" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource PremiumPanelBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SlateBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="InsetCardWell" TargetType="Border">
+            <Setter Property="Background" Value="#091529"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SlateInsetBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="7"/>
+        </Style>
+        <Style x:Key="InsetCardPlate" TargetType="Border" BasedOn="{StaticResource InsetCardShell}">
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="CornerRadius" Value="7"/>
+            <Setter Property="Background" Value="{StaticResource SlateFieldBrush}"/>
+        </Style>
+        <Style x:Key="InsetFormCard" TargetType="HeaderedContentControl">
+            <Setter Property="BorderBrush" Value="{StaticResource SlateBorderBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="HeaderedContentControl">
+                        <Border Style="{StaticResource InsetCardShell}" BorderBrush="{TemplateBinding BorderBrush}" Padding="12">
+                            <DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                                    <Border DockPanel.Dock="Left" Style="{StaticResource InsetCardPlate}" Margin="0,0,9,0">
+                                        <Image Source="{TemplateBinding Tag}" Width="23" Height="23"/>
+                                    </Border>
+                                    <TextBlock Text="{TemplateBinding Header}" Foreground="{StaticResource MetricGold}" FontSize="17"
+                                               FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Border Style="{StaticResource InsetCardWell}" Padding="10,9">
+                                    <ContentPresenter ContentSource="Content"/>
+                                </Border>
+                            </DockPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="OverviewCard" TargetType="HeaderedContentControl" BasedOn="{StaticResource InsetFormCard}">
+            <Setter Property="MinHeight" Value="112"/>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="14"/>
@@ -79,7 +142,7 @@
             <Setter Property="Height" Value="36"/>
             <Setter Property="MinHeight" Value="36"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -131,7 +194,7 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="23"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource Text900Brush}"/>
+            <Setter Property="Foreground" Value="{StaticResource MetricGold}"/>
             <Setter Property="Margin" Value="2,0,0,3"/>
         </Style>
         <Style x:Key="PageSubtitle" TargetType="TextBlock">

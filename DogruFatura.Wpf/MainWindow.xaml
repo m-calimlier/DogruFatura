@@ -87,57 +87,57 @@
                         <StackPanel Margin="0,12,0,0">
                             <Button x:Name="NavHome" Style="{StaticResource NavButton}" Tag="Active" Click="NavHome_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource HomeCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="ANA EKRAN" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Border Height="3" Background="#384C64" Margin="16,8" CornerRadius="1.5"/>
                             <Button x:Name="NavInvoice" Style="{StaticResource NavButton}" Click="NavInvoice_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource InvoiceCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="FATURA GİRİŞİ" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavOfficials" Style="{StaticResource NavButton}" Click="NavOfficials_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource SignatureCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="YETKİLİ / İMZA" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavList" Style="{StaticResource NavButton}" Click="NavList_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource ListCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="FATURA LİSTESİ" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Border Height="3" Background="#384C64" Margin="16,8" CornerRadius="1.5"/>
                             <Button x:Name="NavSchools" Style="{StaticResource NavButton}" Click="NavSchools_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource SchoolCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="OKUL / KURUM" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavArchive" Style="{StaticResource NavButton}" Click="NavArchive_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource ArchiveCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="İŞLEM ARŞİVİ" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavStatistics" Style="{StaticResource NavButton}" Click="NavStatistics_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource ChartCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="İSTATİSTİK" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavSecurity" Style="{StaticResource NavButton}" Click="NavSecurity_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource ShieldCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="GÜVENLİK" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
                             <Button x:Name="NavAbout" Style="{StaticResource NavButton}" Click="NavAbout_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" FontSize="19" Width="30" Foreground="#E8C778"/>
+                                    <Image Source="{StaticResource SettingsCardIcon}" Width="18" Height="18" Margin="0,0,12,0"/>
                                     <TextBlock Text="HAKKINDA / AYARLAR" Style="{StaticResource NavLabel}"/>
                                 </StackPanel>
                             </Button>
@@ -159,147 +159,49 @@
                             <StackPanel>
                                 <TextBlock Text="Aktif Çalışma Özeti" Style="{StaticResource PageTitle}"/>
                                 <TextBlock Text="Aktif listeniz ve HYS kapanışı bekleyen paketleriniz, tek bakışta." Style="{StaticResource PageSubtitle}"/>
-                                <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="132">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel>
-                                            <TextBlock Text="Ödeme Toplamı" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                            <TextBox x:Name="HomePaymentText" Text="—" Foreground="White" FontSize="34" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                            <TextBlock Text="Aktif fatura listesinin net ödeme tutarı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
-                                        </StackPanel>
-                                        <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="18" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                            <Viewbox Width="30" Height="30">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M3,5 L21,5 21,19 3,19 Z M3,9 L21,9 M7,14 L11,14 M17,13 L17,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                        </Border>
-                                    </Grid>
-                                </Border>
+                                <HeaderedContentControl Header="Ödeme Toplamı" Tag="{StaticResource TransferCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8" BorderBrush="{StaticResource PrimaryActionBorderBrush}">
+                                    <StackPanel>
+                                        <TextBox x:Name="HomePaymentText" Text="—" Foreground="White" FontSize="34" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                        <TextBlock Text="Aktif fatura listesinin net ödeme tutarı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </HeaderedContentControl>
                                 <UniformGrid Columns="2" x:Name="HomeFactsGrid">
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="Aktif Faturalar" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomeInvoiceCountText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBlock Text="Listedeki fatura sayısı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="18" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="Liste Türü" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomeInvoiceTypeText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBlock Text="Tek türden oluşan aktif liste" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="18" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M14,2 L5,13 11,13 9,22 20,9 13,9 Z" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="Çıktı Sayfası" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomePageCountText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBlock Text="Resmî ödeme listesi sayfa sayısı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="18" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M7,2 L21,2 21,18 M3,6 L17,6 17,22 3,22 Z M6,11 L14,11 M6,15 L14,15" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="HYS Bekleyen Paketler" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomePendingText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBlock Text="Kaydedilmiş, henüz HYS ile kapanmamış listeler" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="18" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M12,2 A10,10 0 1 1 11.99,2 M12,6 L12,12 16,15" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="Vadesi Geçenler" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomeOverdueCountText" Text="0" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,10,0,4" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBox x:Name="HomeOverdueTotalText" Text="0,00 TL Fatura Tutarı" Foreground="#B9CBDA" FontSize="13" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="16" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M12,2 A10,10 0 1 1 11.99,2 M12,6 L12,12 16,15" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                    <Border Style="{StaticResource PaymentMetricCard}" Padding="16" Margin="0,0,12,8" MinHeight="112">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="Kurum Sayısı" Foreground="#E8C778" FontSize="12.5" FontWeight="SemiBold"/>
-                                                <TextBox x:Name="HomeInstitutionCountText" Text="0" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,10,0,4" Style="{StaticResource CopyableInfo}"/>
-                                                <TextBlock Text="Aktif Listedeki Farklı Okul / Kurum" Foreground="#B9CBDA" FontSize="13" TextWrapping="Wrap"/>
-                                            </StackPanel>
-                                            <Border Grid.Column="1" Background="#23374E" BorderBrush="#AD9054" BorderThickness="1" CornerRadius="16" Width="58" Height="58" Margin="12,0,0,0" VerticalAlignment="Top">
-                                                <Viewbox Width="30" Height="30">
-                                                    <Canvas Width="24" Height="24">
-                                                        <Path Data="M2,8 L12,2 22,8 Z M5,10 L5,19 M10,10 L10,19 M15,10 L15,19 M20,10 L20,19 M2,22 L22,22" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                    </Canvas>
-                                                </Viewbox>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
+                                    <HeaderedContentControl Header="Aktif Faturalar" Tag="{StaticResource InvoiceCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomeInvoiceCountText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBlock Text="Listedeki fatura sayısı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Header="Liste Türü" Tag="{StaticResource TagCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomeInvoiceTypeText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBlock Text="Tek türden oluşan aktif liste" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Header="Çıktı Sayfası" Tag="{StaticResource PagesCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomePageCountText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBlock Text="Resmî ödeme listesi sayfa sayısı" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Header="HYS Bekleyen Paketler" Tag="{StaticResource ClockCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomePendingText" Text="—" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,12,0,6" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBlock Text="Kaydedilmiş, henüz HYS ile kapanmamış listeler" Foreground="#B9CBDA" FontSize="13.0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Header="Vadesi Geçenler" Tag="{StaticResource AlertCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomeOverdueCountText" Text="0" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,10,0,4" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBox x:Name="HomeOverdueTotalText" Text="0,00 TL Fatura Tutarı" Foreground="#B9CBDA" FontSize="13" TextWrapping="Wrap" Style="{StaticResource CopyableInfo}"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Header="Kurum Sayısı" Tag="{StaticResource SchoolCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,12,8">
+                                        <StackPanel>
+                                            <TextBox x:Name="HomeInstitutionCountText" Text="0" Foreground="White" FontSize="25" FontWeight="Bold" Margin="0,10,0,4" Style="{StaticResource CopyableInfo}"/>
+                                            <TextBlock Text="Aktif Listedeki Farklı Okul / Kurum" Foreground="#B9CBDA" FontSize="13" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </HeaderedContentControl>
                                 </UniformGrid>
                             </StackPanel>
                         </ScrollViewer>
@@ -310,18 +212,12 @@
                                 <TextBlock Text="Aktif liste tek fatura türüne kilitlenir; farklı fatura türleri aynı ödeme listesinde birleştirilemez." Style="{StaticResource PageSubtitle}"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1.1*"/>
                                         <ColumnDefinition Width="14"/>
-                                        <ColumnDefinition Width="1.06*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" Style="{StaticResource PremiumPanel}" Padding="16">
+                                    <HeaderedContentControl Grid.Column="0" Header="Fatura ve Kurum Bilgileri" Tag="{StaticResource InvoiceCardIcon}" Style="{StaticResource InsetFormCard}">
                                         <StackPanel>
-                                            <DockPanel Margin="0,0,0,10">
-                                                <Border DockPanel.Dock="Right" Background="#23374E" BorderBrush="#B78B42" BorderThickness="1" CornerRadius="12" Width="48" Height="48" Margin="12,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#E8C778" FontSize="26" HorizontalAlignment="Center"/>
-                                                </Border>
-                                                <TextBlock Text="Fatura Ve Kurum Bilgileri" Style="{StaticResource PremiumSectionTitle}"/>
-                                            </DockPanel>
                                             <TextBlock Text="Yıldızlı alanlar ve ilgili hizmet numarası kayıt için zorunludur; VKN ile fatura no isteğe bağlıdır." Style="{StaticResource PremiumSectionSubtitle}" TextWrapping="Wrap" Margin="0,3,0,13"/>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -406,35 +302,29 @@
                                                 </StackPanel>
                                             </Border>
                                         </StackPanel>
-                                    </Border>
-                                    <Border Grid.Column="2" Style="{StaticResource PremiumPanel}" Padding="16">
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Grid.Column="2" Header="Canlı Vergi Hesabı" Tag="{StaticResource CalculatorCardIcon}" Style="{StaticResource InsetFormCard}">
                                         <StackPanel>
-                                            <DockPanel Margin="0,0,0,10">
-                                                <Border DockPanel.Dock="Right" Background="#23374E" BorderBrush="#B78B42" BorderThickness="1" CornerRadius="12" Width="48" Height="48" Margin="12,0,0,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#E8C778" FontSize="26" HorizontalAlignment="Center"/>
-                                                </Border>
-                                                <TextBlock Text="Canlı Vergi Hesabı" Style="{StaticResource PremiumSectionTitle}"/>
-                                            </DockPanel>
                                             <TextBlock x:Name="TaxPolicyDescription" TextWrapping="Wrap" Text="Seçilen fatura türüne göre hesaplama yapılır." Style="{StaticResource PremiumSectionSubtitle}" Margin="0,3,0,13"/>
-                                            <Border Style="{StaticResource PaymentMetricCard}" Padding="14,11" Margin="0,0,0,9">
-                                                <Grid>
+                                            <Border Style="{StaticResource InsetCardWell}" Padding="14,11" Margin="0,0,0,9">
+                                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                                                     <StackPanel>
                                                         <TextBlock Text="KDV Matrahı" Foreground="#9FB6CA" FontSize="12.5" FontWeight="Bold"/>
                                                         <TextBlock x:Name="VatBaseFormulaText" Text="Tutar − KDV" Foreground="#D8E4EF" FontSize="13.0"/>
                                                     </StackPanel>
-                                                    <TextBox x:Name="VatBaseText" Text="0,00 TL" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Style="{StaticResource CopyableInfo}"/>
+                                                    <TextBox Grid.Column="1" Margin="10,0,0,0" x:Name="VatBaseText" Text="0,00 TL" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Style="{StaticResource CopyableInfo}"/>
                                                 </Grid>
                                             </Border>
-                                            <Border Style="{StaticResource PaymentMetricCard}" Padding="14,11" Margin="0,0,0,9">
-                                                <Grid>
+                                            <Border Style="{StaticResource InsetCardWell}" Padding="14,11" Margin="0,0,0,9">
+                                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                                                     <StackPanel>
                                                         <TextBlock Text="Damga Vergisi" Foreground="#9FB6CA" FontSize="12.5" FontWeight="Bold"/>
-                                                        <TextBlock x:Name="StampDutyFormulaText" Text="Matrah × 0,00948" Foreground="#D8E4EF" FontSize="13.0"/>
+                                                        <TextBlock TextWrapping="Wrap" x:Name="StampDutyFormulaText" Text="Matrah × 0,00948" Foreground="#D8E4EF" FontSize="13.0"/>
                                                     </StackPanel>
-                                                    <TextBox x:Name="StampDutyText" Text="0,00 TL" Foreground="#F4C45E" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Style="{StaticResource CopyableInfo}"/>
+                                                    <TextBox Grid.Column="1" Margin="10,0,0,0" x:Name="StampDutyText" Text="0,00 TL" Foreground="#F4C45E" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Style="{StaticResource CopyableInfo}"/>
                                                 </Grid>
                                             </Border>
-                                            <Border Style="{StaticResource PaymentMetricCard}" Padding="14,15" Margin="0,0,0,10">
+                                            <Border Style="{StaticResource InsetCardWell}" Padding="14,15" Margin="0,0,0,10">
                                                 <StackPanel>
                                                     <TextBlock Text="Ödeme Tutarı" Foreground="#D9E9F6" FontSize="13.0" FontWeight="Bold"/>
                                                     <TextBox x:Name="PaymentAmountText" Text="0,00 TL" Foreground="White" FontSize="28" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,4,0,0" Style="{StaticResource CopyableInfo}"/>
@@ -451,7 +341,7 @@
                                                 <TextBlock x:Name="InvoiceSaveStatusText" Text="Tüm zorunlu alanlar tamamlandığında kayıt etkinleşir." Style="{StaticResource StatusText}" TextAlignment="Center"/>
                                             </Border>
                                         </StackPanel>
-                                    </Border>
+                                    </HeaderedContentControl>
                                 </Grid>
                             </StackPanel>
                         </ScrollViewer>
@@ -552,8 +442,8 @@
                                         </Grid.RowDefinitions>
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <Border Width="40" Height="40" Background="#354C65" CornerRadius="8" Margin="0,0,12,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#F4C45E" FontSize="21" HorizontalAlignment="Center"/>
+                                                <Border Style="{StaticResource InsetCardPlate}" Margin="0,0,9,0">
+                                                    <Image Source="{StaticResource SignatureCardIcon}" Width="23" Height="23" HorizontalAlignment="Center"/>
                                                 </Border>
                                                 <StackPanel VerticalAlignment="Center">
                                                     <TextBlock Text="Gerçekleştirme Görevlisi" Style="{StaticResource PremiumSectionTitle}"/>
@@ -591,8 +481,8 @@
                                         </Grid.RowDefinitions>
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <Border Width="40" Height="40" Background="#354C65" CornerRadius="8" Margin="0,0,12,0">
-                                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#F4C45E" FontSize="21" HorizontalAlignment="Center"/>
+                                                <Border Style="{StaticResource InsetCardPlate}" Margin="0,0,9,0">
+                                                    <Image Source="{StaticResource ShieldCardIcon}" Width="23" Height="23" HorizontalAlignment="Center"/>
                                                 </Border>
                                                 <StackPanel VerticalAlignment="Center">
                                                     <TextBlock Text="Harcama Yetkilisi" Style="{StaticResource PremiumSectionTitle}"/>
@@ -651,59 +541,27 @@
                                 <TextBlock Text="Liste yalnız tek fatura türünden oluşur; seçili tür, son kayıt silinene kadar korunur." Style="{StaticResource PageSubtitle}"/>
                             </StackPanel>
                             <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,10">
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="0,0,4,0">
+                                <HeaderedContentControl Header="Fatura Sayısı" Tag="{StaticResource InvoiceCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Fatura Sayısı" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ActiveInvoiceCountText" Text="0 kayıt" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="0,4,0,0" Style="{StaticResource CopyableInfo}"/>
                                         <TextBox x:Name="ActiveInvoiceTypeText" Text="Tür: Henüz belirlenmedi" Foreground="#FFFFFF" FontSize="13.0" Margin="0,2,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Toplam Tutar" Tag="{StaticResource CoinsCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M3,5 L21,5 21,19 3,19 Z M3,9 L21,9 M7,14 L11,14 M17,13 L17,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Toplam Tutar" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ActivePayableTotalText" Text="0,00 TL" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="0,4,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Toplam Damga" Tag="{StaticResource StampCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M3,5 L21,5 21,19 3,19 Z M3,9 L21,9 M7,14 L11,14 M17,13 L17,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Toplam Damga" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ActiveStampTotalText" Text="0,00 TL" Foreground="#F1D18A" FontSize="20" FontWeight="Bold" Margin="0,4,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="4,0,0,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Toplam Ödeme" Tag="{StaticResource TransferCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0" BorderBrush="{StaticResource PrimaryActionBorderBrush}">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M3,5 L21,5 21,19 3,19 Z M3,9 L21,9 M7,14 L11,14 M17,13 L17,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Toplam Ödeme" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ActivePaymentTotalText" Text="0,00 TL" Foreground="#A8E3C2" FontSize="20" FontWeight="Bold" Margin="0,4,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
+                                </HeaderedContentControl>
                             </UniformGrid>
                             <Border Grid.Row="2" Style="{StaticResource PremiumPanel}" Padding="12" Margin="0,0,0,10">
                                 <Grid>
@@ -742,7 +600,7 @@
                                     </DataGrid>
                                     <Border x:Name="InvoiceListEmptyState" Background="#111F36" IsHitTestVisible="False">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#9BB0C2" FontSize="42" HorizontalAlignment="Center"/>
+                                            <Image Source="{StaticResource InvoiceCardIcon}" Width="23" Height="23" HorizontalAlignment="Center"/>
                                             <TextBlock Text="Aktif Listede Henüz Fatura Yok" Foreground="#B9CDDF" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                                             <TextBlock Text="Fatura Girişi ekranından ilk kaydı ekleyebilirsiniz." Foreground="#B9CDDF" FontSize="13" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                                         </StackPanel>
@@ -770,58 +628,26 @@
                                 </StackPanel>
                             </Grid>
                             <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,9">
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="0,0,4,0">
+                                <HeaderedContentControl Header="Tüm Arşiv" Tag="{StaticResource ArchiveCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Tüm Arşiv" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ArchiveListCountText" Text="0 liste" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="0,3,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="HYS İle Kapalı" Tag="{StaticResource ShieldCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="HYS İle Kapalı" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ArchiveClosedListCountText" Text="0 liste" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="0,3,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Kapalı Fatura" Tag="{StaticResource InvoiceCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M12,2 L21,6 20,14 Q18,20 12,23 Q6,20 4,14 L3,6 Z M7,12 L11,16 17,9" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Kapalı Fatura" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ArchiveInvoiceCountText" Text="0 fatura" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="0,3,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="4,0,0,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Kapalı Ödeme" Tag="{StaticResource TransferCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0" BorderBrush="{StaticResource PrimaryActionBorderBrush}">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M12,2 L21,6 20,14 Q18,20 12,23 Q6,20 4,14 L3,6 Z M7,12 L11,16 17,9" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Kapalı Ödeme" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="ArchivePaymentTotalText" Text="0,00 TL" Foreground="#A8E3C2" FontSize="20" FontWeight="Bold" Margin="0,3,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
+                                </HeaderedContentControl>
                             </UniformGrid>
                             <Border Grid.Row="2" Style="{StaticResource PremiumPanel}" Padding="12" Margin="0,0,0,9">
                                 <StackPanel>
@@ -922,7 +748,7 @@
                                         </DataGrid>
                                         <Border x:Name="ArchiveListEmptyState" Background="#111F36" IsHitTestVisible="False">
                                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#9BB0C2" FontSize="38" HorizontalAlignment="Center"/>
+                                                <Image Source="{StaticResource ArchiveCardIcon}" Width="23" Height="23" HorizontalAlignment="Center"/>
                                                 <TextBlock Text="Arşivde Eşleşen Liste Yok" Foreground="#B9CDDF" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,9,0,0"/>
                                                 <TextBlock Text="Yeni faturalar ekleyerek bir ödeme listesi oluşturabilirsiniz." Foreground="#B9CDDF" FontSize="12.5" HorizontalAlignment="Center" Margin="0,3,0,0"/>
                                             </StackPanel>
@@ -949,58 +775,26 @@
                                 </StackPanel>
                             </Grid>
                             <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,9">
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="0,0,4,0">
+                                <HeaderedContentControl Header="Arşiv" Tag="{StaticResource ArchiveCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Arşiv" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="StatisticsArchiveCountText" Text="0 arşiv" Foreground="#FFFFFF" FontSize="19" FontWeight="Bold" Margin="0,2,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Fatura" Tag="{StaticResource InvoiceCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Fatura" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="StatisticsInvoiceCountText" Text="0 fatura" Foreground="#FFFFFF" FontSize="19" FontWeight="Bold" Margin="0,2,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="3,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Kurum" Tag="{StaticResource SchoolCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M5,2 L15,2 20,7 20,22 5,22 Z M15,2 L15,7 20,7 M8,12 L17,12 M8,16 L15,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Kurum" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="StatisticsInstitutionCountText" Text="0 kurum" Foreground="#FFFFFF" FontSize="19" FontWeight="Bold" Margin="0,2,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
-                                <Border Style="{StaticResource PaymentMetricCard}" Margin="4,0,0,0">
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Header="Toplam Ödeme" Tag="{StaticResource TransferCardIcon}" Style="{StaticResource OverviewCard}" Margin="0,0,8,0" BorderBrush="{StaticResource PrimaryActionBorderBrush}">
                                     <StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Viewbox Width="28" Height="28" Margin="0,0,9,0" VerticalAlignment="Center" Focusable="False">
-                                                <Canvas Width="24" Height="24">
-                                                    <Path Data="M3,5 L21,5 21,19 3,19 Z M3,9 L21,9 M7,14 L11,14 M17,13 L17,16" Stroke="#E8C778" StrokeThickness="1.5" StrokeLineJoin="Round"/>
-                                                </Canvas>
-                                            </Viewbox>
-                                            <TextBlock Text="Toplam Ödeme" Foreground="#C5D6E5" FontSize="12.5" FontWeight="Bold"/>
-                                        </StackPanel>
                                         <TextBox x:Name="StatisticsPaymentTotalText" Text="0,00 TL" Foreground="#A8E3C2" FontSize="19" FontWeight="Bold" Margin="0,2,0,0" Style="{StaticResource CopyableInfo}"/>
                                     </StackPanel>
-                                </Border>
+                                </HeaderedContentControl>
                             </UniformGrid>
                             <Border Grid.Row="2" Style="{StaticResource PremiumPanel}" Padding="12" Margin="0,0,0,9">
                                 <StackPanel>
@@ -1068,7 +862,7 @@
                                                 <ColumnDefinition Width="14"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Border Padding="18" ClipToBounds="False" Style="{StaticResource PaymentMetricCard}" MinHeight="440">
+                                            <Border Padding="12" ClipToBounds="False" Style="{StaticResource InsetCardShell}" MinHeight="440">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto"/>
@@ -1092,7 +886,7 @@
                                                     </Viewbox>
                                                 </Grid>
                                             </Border>
-                                            <Border Grid.Column="2" Padding="18" ClipToBounds="False" Style="{StaticResource PaymentMetricCard}" MinHeight="440">
+                                            <Border Grid.Column="2" Padding="12" ClipToBounds="False" Style="{StaticResource InsetCardShell}" MinHeight="440">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto"/>
@@ -1106,7 +900,7 @@
                                                     <Grid Grid.Row="1">
                                                         <StackPanel x:Name="StatisticsDonutLegendPanel" VerticalAlignment="Top"/>
                                                         <StackPanel x:Name="StatisticsDonutEmptyState" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#C5D6E5" FontSize="38" HorizontalAlignment="Center"/>
+                                                            <Image Source="{StaticResource ChartCardIcon}" Width="23" Height="23" HorizontalAlignment="Center"/>
                                                             <TextBlock Text="Dağılım Verisi Yok" Foreground="#E8C778" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,9,0,0"/>
                                                             <TextBlock Text="Filtreleri değiştirerek başka bir dönem veya kurum seçebilirsiniz." Foreground="#C5D6E5" FontSize="12.5" TextWrapping="Wrap" TextAlignment="Center" Margin="0,4,0,0"/>
                                                         </StackPanel>
@@ -1167,11 +961,7 @@
                                 <TextBlock Text="Veri bütünlüğü, yedekleme ve geri yükleme." Style="{StaticResource PageSubtitle}"/>
                                 <Border Style="{StaticResource PremiumPanel}" Padding="18">
                                     <StackPanel>
-                                        <DockPanel Margin="0,0,0,10">
-                                            <Border DockPanel.Dock="Right" Background="#23374E" BorderBrush="#B78B42" BorderThickness="1" CornerRadius="12" Width="48" Height="48" Margin="12,0,0,0">
-                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Foreground="#E8C778" FontSize="26" HorizontalAlignment="Center"/>
-                                            </Border>
-                                            <TextBlock Text="Veri Güvenliği" Style="{StaticResource PremiumSectionTitle}"/>
+                                        <DockPanel Margin="0,0,0,10"><Border DockPanel.Dock="Left" Style="{StaticResource InsetCardPlate}" Margin="0,0,9,0"><Image Source="{StaticResource ShieldCardIcon}" Width="23" Height="23"/></Border><TextBlock Text="Veri Güvenliği" Style="{StaticResource PremiumSectionTitle}"/>
                                         </DockPanel>
                                         <TextBlock Text="Kayıtlar ile aktif ve arşiv PDF belgeleri birlikte korunur." Foreground="{StaticResource PremiumMutedTextBrush}" FontSize="12.5" Margin="0,4,0,0" TextWrapping="Wrap"/>
                                         <Border Background="#182943" BorderBrush="#617C99" BorderThickness="1" CornerRadius="8" Padding="12,9" Margin="0,13,0,10">

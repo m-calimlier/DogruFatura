@@ -65,13 +65,13 @@ public partial class MainWindow
         var heading = new StackPanel();
         heading.Children.Add(new TextBlock { Text = window.Title, Foreground = (Brush)FindResource("Gold500Brush"), FontSize = 19, FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 12) });
         var cards = new System.Windows.Controls.Primitives.UniformGrid { Name = "ArchiveSummaryCards", Columns = 4, Margin = new Thickness(0, 0, 0, 10) };
-        cards.Children.Add(ArchiveSummaryCard("\uE8A5", "Paket Bilgisi", archive.ArchiveNumber,
+        cards.Children.Add(ArchiveSummaryCard("ArchiveCardIcon", "Paket Bilgisi", archive.ArchiveNumber,
             archive.ArchivedAt.ToString("dd.MM.yyyy HH:mm", CultureInfo.CurrentCulture)
             + "\nHYS: " + (archive.IsClosed ? archive.HysDisplay : "Henüz Girilmedi")));
-        cards.Children.Add(ArchiveSummaryCard("\uE8D7", "Toplam Damga Vergisi",
+        cards.Children.Add(ArchiveSummaryCard("StampCardIcon", "Toplam Damga Vergisi",
             NumberParser.Money(archive.Invoices.Count > 0 ? archive.Invoices.Sum(i => i.StampDuty) : archive.LegacyStampDutyTotal), "Paketin Damga Vergisi Toplamı"));
-        cards.Children.Add(ArchiveSummaryCard("\uE8D4", "Toplam Ödeme", NumberParser.Money(archive.PaymentTotal), "Fatura Tutarı: " + NumberParser.Money(archive.Invoices.Count > 0 ? archive.Invoices.Sum(i => i.PayableAmount) : archive.LegacyGrossTotal)));
-        cards.Children.Add(ArchiveSummaryCard("\uE8EC", "Toplam KDV",
+        cards.Children.Add(ArchiveSummaryCard("TransferCardIcon", "Toplam Ödeme", NumberParser.Money(archive.PaymentTotal), "Fatura Tutarı: " + NumberParser.Money(archive.Invoices.Count > 0 ? archive.Invoices.Sum(i => i.PayableAmount) : archive.LegacyGrossTotal)));
+        cards.Children.Add(ArchiveSummaryCard("CalculatorCardIcon", "Toplam KDV",
             archive.IsLegacyEvidenceOnly ? "Bilgi Yok" : NumberParser.Money(archive.Invoices.Sum(i => i.VatAmount)),
             archive.IsLegacyEvidenceOnly ? "Kaynak Belgede KDV Ayrıntısı Yok" : "Paketin KDV Toplamı"));
         heading.Children.Add(cards);
@@ -116,16 +116,16 @@ public partial class MainWindow
         return window;
     }
 
-    private Border ArchiveSummaryCard(string symbol, string title, string value, string detail)
+    private HeaderedContentControl ArchiveSummaryCard(string icon, string title, string value, string detail)
     {
         var content = new StackPanel();
-        var caption = new DockPanel { Margin = new Thickness(0, 0, 0, 10) };
-        caption.Children.Add(new TextBlock { Text = symbol, FontFamily = new FontFamily("Segoe MDL2 Assets"), FontSize = 24, Foreground = (Brush)FindResource("Gold500Brush"), Margin = new Thickness(0, 0, 9, 0) });
-        caption.Children.Add(new TextBlock { Text = title, FontSize = 12, FontWeight = FontWeights.SemiBold, Foreground = (Brush)FindResource("Gold500Brush"), VerticalAlignment = VerticalAlignment.Center });
-        content.Children.Add(caption);
         content.Children.Add(new TextBox { Text = value, Style = (Style)FindResource("CopyableInfo"), FontSize = 16, FontWeight = FontWeights.Bold, TextWrapping = TextWrapping.Wrap });
         content.Children.Add(new TextBlock { Text = detail, FontSize = 11.5, Foreground = (Brush)FindResource("PremiumMutedTextBrush"), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 6, 0, 0) });
-        return new Border { Style = (Style)FindResource("PaymentMetricCard"), Padding = new Thickness(12), Margin = new Thickness(0, 0, 8, 0), MinHeight = 112, Child = content };
+        return new HeaderedContentControl
+        {
+            Header = title, Tag = FindResource(icon), Style = (Style)FindResource("OverviewCard"),
+            Margin = new Thickness(0, 0, 8, 0), Content = content
+        };
     }
 
     private bool TryCloseArchive(ArchivedInvoiceList archive, string hys, out string error)
