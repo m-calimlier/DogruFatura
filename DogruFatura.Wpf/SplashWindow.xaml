@@ -3,56 +3,74 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Icon="Assets/AppIcon.ico" Title="DoğruFatura"
         Width="460" Height="585" WindowStyle="None" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen" Background="#0B162B" FontFamily="Segoe UI"
+        MaxWidth="{Binding Width, Source={x:Static SystemParameters.WorkArea}}"
+        MaxHeight="{Binding Height, Source={x:Static SystemParameters.WorkArea}}"
+        WindowStartupLocation="CenterScreen" Background="#08162B" FontFamily="Segoe UI"
         ShowInTaskbar="True" UseLayoutRounding="True" SnapsToDevicePixels="True">
-    <Grid>
-        <Border Margin="18" CornerRadius="17" BorderThickness="1" BorderBrush="#9B804E">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#1F2C44" Offset="0"/>
-                    <GradientStop Color="#111F36" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Canvas IsHitTestVisible="False">
-            <Ellipse Width="156" Height="156" Canvas.Left="285" Canvas.Top="48">
-                <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#20E8C778" Offset="0"/><GradientStop Color="#00E8C778" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
-            </Ellipse>
-            <Ellipse Width="148" Height="148" Canvas.Left="18" Canvas.Top="386">
-                <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#1AE8C778" Offset="0"/><GradientStop Color="#00E8C778" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
-            </Ellipse>
-            <Path Stroke="#8AD7AE61" Data="M360,115 H372 M366,109 V121 M76,409 H86 M81,404 V414"/>
-        </Canvas>
-        <StackPanel VerticalAlignment="Top" Margin="0,51,0,0">
-            <Image Source="Assets/AppIcon_512.png" Width="70" Height="70"/>
-            <TextBlock TextAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#F0F6FC" Margin="0,8,0,0">
-                <Run Text="Doğru"/><Run Text="Fatura" Foreground="#E8C778"/>
-            </TextBlock>
-        </StackPanel>
-        <Grid Width="136" Height="136" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Ellipse Margin="6" Fill="#091529" Stroke="#384C64" StrokeThickness="6"/>
-            <Path x:Name="ProgressArc" Stroke="#D7AE61" StrokeThickness="6" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-            <Ellipse x:Name="CompletedRing" Visibility="Collapsed" Margin="6" Stroke="#D7AE61" StrokeThickness="6"/>
-            <TextBlock x:Name="PercentText" Text="%0" FontSize="34" FontWeight="Bold" Foreground="#E8C778" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-        <TextBlock x:Name="StageText" Text="Bileşenler hazırlanıyor..." VerticalAlignment="Center"
-                   Margin="32,173,32,0" Foreground="#B9CDDF" FontSize="13" TextAlignment="Center" TextWrapping="Wrap"/>
-        <Border VerticalAlignment="Bottom" Margin="39,0,39,32" Padding="12,12,12,10" CornerRadius="12"
-                Background="#091529" BorderBrush="#A38751" BorderThickness="1">
-            <Border.Effect><DropShadowEffect Color="#000000" BlurRadius="15" ShadowDepth="4" Opacity=".35"/></Border.Effect>
-            <StackPanel>
-                <TextBlock Text="Created by" Foreground="#E8C778" FontSize="15" FontWeight="SemiBold" TextAlignment="Center"/>
-                <TextBlock Text="Murat ÇALIMLER" FontSize="32" FontWeight="Bold" TextAlignment="Center" Margin="0,3,0,0">
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                            <GradientStop Color="#FFF2C6" Offset="0"/>
-                            <GradientStop Color="#E8C778" Offset=".52"/>
-                            <GradientStop Color="#C09950" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
+    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+        <Grid Width="460" Height="585" Background="#08162B" ClipToBounds="True">
+            <Border Margin="18" CornerRadius="17" BorderThickness="1" BorderBrush="#CDAA60">
+                <Border.Background>
+                    <RadialGradientBrush Center=".42,.23" GradientOrigin=".42,.23" RadiusX=".72" RadiusY=".82">
+                        <GradientStop Color="#172C49" Offset="0"/>
+                        <GradientStop Color="#0D1C33" Offset=".53"/>
+                        <GradientStop Color="#08162B" Offset="1"/>
+                    </RadialGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Canvas IsHitTestVisible="False">
+                <Path Fill="#105D83AC" Data="M19,117 C43,75 80,43 135,19 H177 C99,46 49,82 19,134 Z"/>
+                <Path Fill="#105D83AC" Data="M441,463 C418,509 373,544 319,566 H284 C357,545 410,515 441,446 Z"/>
+                <Path Stroke="#5BCDAA60" StrokeThickness="1"
+                      Data="M20,117 C47,71 90,36 135,19 M441,463 C414,513 370,547 318,566"/>
+                <Ellipse Width="80" Height="80" Canvas.Left="28" Canvas.Top="44">
+                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#29E8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Width="80" Height="80" Canvas.Left="359" Canvas.Top="475">
+                    <Ellipse.Fill><RadialGradientBrush><GradientStop Color="#23E8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+                </Ellipse>
+            </Canvas>
+
+            <StackPanel VerticalAlignment="Top" Margin="0,49,0,0">
+                <Image Source="Assets/AppIcon_512.png" Width="76" Height="76"/>
+                <TextBlock TextAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="#F3F5F8" Margin="0,9,0,0">
+                    <Run Text="Doğru"/><Run Text="Fatura" Foreground="#E8B84F"/>
                 </TextBlock>
-                <TextBlock x:Name="VersionText" Foreground="#B9CDDF" FontSize="11" TextAlignment="Center" Margin="0,5,0,0"/>
             </StackPanel>
-        </Border>
-    </Grid>
+
+            <Grid Width="136" Height="136" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Ellipse Margin="6" Fill="#091529" Stroke="#38516F" StrokeThickness="6"/>
+                <Path x:Name="ProgressArc" Stroke="#E8B84F" StrokeThickness="6" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                <Ellipse x:Name="CompletedRing" Visibility="Collapsed" Margin="6" Stroke="#E8B84F" StrokeThickness="6"/>
+                <TextBlock x:Name="PercentText" Text="%0" FontSize="34" FontWeight="Bold" Foreground="#E8B84F"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <TextBlock x:Name="StageText" Text="Bileşenler hazırlanıyor..." VerticalAlignment="Center"
+                       Margin="32,173,32,0" Foreground="#B2C4D8" FontSize="14" TextAlignment="Center" TextWrapping="Wrap"/>
+
+            <Grid Width="280" Height="88" VerticalAlignment="Bottom" Margin="0,0,0,53">
+                <Path Data="M17,1 H263 L279,17 V71 L263,87 H17 L1,71 V17 Z"
+                      Fill="#0A172B" Stroke="#CDAA60" StrokeThickness="1.2">
+                    <Path.Effect><DropShadowEffect Color="#000000" BlurRadius="13" ShadowDepth="3" Opacity=".32"/></Path.Effect>
+                </Path>
+                <Rectangle Width="116" Height="16" VerticalAlignment="Top" Margin="0,-7,0,0" IsHitTestVisible="False">
+                    <Rectangle.Fill><RadialGradientBrush><GradientStop Color="#4CE8B84F" Offset="0"/><GradientStop Color="#00E8B84F" Offset="1"/></RadialGradientBrush></Rectangle.Fill>
+                </Rectangle>
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Border Width="25" Height="1" Background="#6F6045" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Created by" Foreground="#DAB66B" FontSize="12" FontWeight="SemiBold"/>
+                        <Border Width="25" Height="1" Background="#6F6045" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="Murat ÇALIMLIER" FontSize="23" FontWeight="Bold" Foreground="#E8B84F"
+                               TextAlignment="Center" Margin="0,2,0,4"/>
+                    <Border HorizontalAlignment="Center" CornerRadius="9" Padding="10,1" Background="#1C304C"
+                            BorderBrush="#776443" BorderThickness="1">
+                        <TextBlock x:Name="VersionText" Foreground="#A5B9D0" FontSize="10" FontWeight="SemiBold"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Window>
