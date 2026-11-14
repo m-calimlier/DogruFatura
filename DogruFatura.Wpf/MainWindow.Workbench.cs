@@ -37,7 +37,7 @@ public partial class MainWindow
     {
         public bool Compact { get; init; }
 
-        public string DisplayProfile { get; init; } = "1366x768";
+        public string DisplayProfile { get; init; } = DisplayProfilePolicy.DefaultProfileKey;
         public List<ColumnPreference> Columns { get; init; } = new();
 
     }

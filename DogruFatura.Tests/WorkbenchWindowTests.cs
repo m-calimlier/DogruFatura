@@ -1,4 +1,4 @@
-﻿using DogruFatura.Core.Models;
+using DogruFatura.Core.Models;
 using DogruFatura.Core.Services;
 using DogruFatura.Wpf;
 using System.Reflection;
@@ -110,7 +110,7 @@ public sealed class WorkbenchWindowTests
                 Assert.Equal(window.FindResource("PremiumFieldComboBox"), ((ComboBox)window.FindName("InstitutionBox")).Style);
                 var date = (DatePicker)window.FindName("InvoiceDatePicker"); date.ApplyTemplate();
                 var dateText = (System.Windows.Controls.Primitives.DatePickerTextBox)date.Template.FindName("PART_TextBox", date);
-                Assert.Equal("#FF082744", dateText.Background.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                Assert.Equal("#FF23374E", dateText.Background.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 var dateButton = (Button)date.Template.FindName("PART_Button", date);
                 dateButton.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent)); Pump(window);
                 var calendarPopup = (System.Windows.Controls.Primitives.Popup)date.Template.FindName("PART_Popup", date);

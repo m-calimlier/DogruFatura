@@ -24,8 +24,9 @@ public sealed class DisplayProfileTests
     }
 
     [Fact]
-    public void UnknownSavedProfileFallsBackTo1366()
+    public void UnknownSavedProfileFallsBackTo1920()
     {
-        Assert.Equal("1366x768", DisplayProfilePolicy.Resolve("old-profile").Key);
+        Assert.Equal("1920x1080", DisplayProfilePolicy.Resolve("old-profile").Key);
+        Assert.Equal("1920x1080", DisplayProfilePolicy.Resolve(null).Key);
     }
 }

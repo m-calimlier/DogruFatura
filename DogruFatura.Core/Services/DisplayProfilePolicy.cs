@@ -1,19 +1,21 @@
-﻿namespace DogruFatura.Core.Services;
+namespace DogruFatura.Core.Services;
 
 public sealed record DisplayProfile(string Key, string Label, double Width, double Height);
 public sealed record DisplaySize(double Width, double Height);
 
 public static class DisplayProfilePolicy
 {
+    public const string DefaultProfileKey = "1920x1080";
+
     public static IReadOnlyList<DisplayProfile> Profiles { get; } = Array.AsReadOnly(new[]
     {
         new DisplayProfile("1024x768", "1024 × 768 · Klasik (4:3)", 1024, 768),
         new DisplayProfile("1366x768", "1366 × 768 · Standart", 1366, 768),
-        new DisplayProfile("1920x1080", "1920 × 1080 · Geniş", 1920, 1080)
+        new DisplayProfile(DefaultProfileKey, "1920 × 1080 · Geniş", 1920, 1080)
     });
 
     public static DisplayProfile Resolve(string? key) =>
-        Profiles.FirstOrDefault(p => p.Key == key) ?? Profiles[1];
+        Profiles.FirstOrDefault(p => p.Key == key) ?? Profiles.First(p => p.Key == DefaultProfileKey);
 
     // Work-area dimensions are WPF DIPs; profile dimensions describe physical pixels.
     public static DisplaySize Fit(string? key, double dpiScale, double workWidth, double workHeight)
