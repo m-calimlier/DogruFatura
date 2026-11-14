@@ -1,16 +1,18 @@
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media.Animation;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace DogruFatura.Wpf;
 
 public partial class SplashWindow : Window
 {
-    private const double ProgressTrackWidth = 395.0;
+    private const double RingCenter = 68;
+    private const double RingRadius = 59;
     private readonly Stopwatch _visibleStopwatch = new();
     private DispatcherTimer? _percentTimer;
     private bool _completionStarted;
+    private int _percent;
 
     public SplashWindow()
     {
@@ -22,37 +24,7 @@ public partial class SplashWindow : Window
     private void SplashWindow_Loaded(object sender, RoutedEventArgs e)
     {
         VersionText.Text = AppVersionInfo.DisplayVersion;
-        SpinnerRotate.BeginAnimation(
-            System.Windows.Media.RotateTransform.AngleProperty,
-            new DoubleAnimation(0, 360, TimeSpan.FromSeconds(0.9))
-            {
-                RepeatBehavior = RepeatBehavior.Forever
-            });
-
-        StageText.Text = "Bileşenler hazırlanıyor...";
-        PercentText.Text = "%0";
-        ProgressFill.Width = 0;
-
-        var timeline = new DoubleAnimationUsingKeyFrames
-        {
-            Duration = TimeSpan.FromMilliseconds(
-                StartupProgressProfile.CruiseDurationMs + StartupProgressProfile.TailDurationMs),
-            FillBehavior = FillBehavior.HoldEnd
-        };
-        timeline.KeyFrames.Add(new LinearDoubleKeyFrame(0, KeyTime.FromTimeSpan(TimeSpan.Zero)));
-        timeline.KeyFrames.Add(new LinearDoubleKeyFrame(
-            ProgressTrackWidth * (StartupProgressProfile.CruiseTargetPercent / 100.0),
-            KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(StartupProgressProfile.CruiseDurationMs))));
-        timeline.KeyFrames.Add(new LinearDoubleKeyFrame(
-            ProgressTrackWidth * (StartupProgressProfile.TailTargetPercent / 100.0),
-            KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(
-                StartupProgressProfile.CruiseDurationMs + StartupProgressProfile.TailDurationMs))));
-
-        ProgressFill.BeginAnimation(
-            FrameworkElement.WidthProperty,
-            timeline,
-            HandoffBehavior.SnapshotAndReplace);
-
+        SetProgress(0);
         _visibleStopwatch.Start();
         _percentTimer = new DispatcherTimer(
             TimeSpan.FromMilliseconds(StartupProgressProfile.FrameDelayMs),
@@ -62,14 +34,35 @@ public partial class SplashWindow : Window
         _percentTimer.Start();
     }
 
+    private void SetProgress(int percent)
+    {
+        _percent = percent;
+        PercentText.Text = $"%{percent}";
+        CompletedRing.Visibility = percent == 100 ? Visibility.Visible : Visibility.Collapsed;
+        if (percent is 0 or 100)
+        {
+            ProgressArc.Data = null;
+            return;
+        }
+
+        var angle = percent * 2 * Math.PI / 100;
+        var end = new Point(RingCenter + RingRadius * Math.Sin(angle), RingCenter - RingRadius * Math.Cos(angle));
+        var geometry = new StreamGeometry();
+        using (var context = geometry.Open())
+        {
+            context.BeginFigure(new Point(RingCenter, RingCenter - RingRadius), false, false);
+            context.ArcTo(end, new Size(RingRadius, RingRadius), 0, percent > 50, SweepDirection.Clockwise, true, false);
+        }
+        geometry.Freeze();
+        ProgressArc.Data = geometry;
+    }
+
     private void UpdateProgressText()
     {
         if (_completionStarted) return;
 
         var elapsed = _visibleStopwatch.ElapsedMilliseconds;
-        var percent = StartupProgressProfile.CalculateContinuousPercent(elapsed);
-        PercentText.Text = $"%{percent}";
-
+        SetProgress(StartupProgressProfile.CalculateContinuousPercent(elapsed));
         StageText.Text = elapsed switch
         {
             < 1700 => "Bileşenler hazırlanıyor...",
@@ -85,39 +78,18 @@ public partial class SplashWindow : Window
         _completionStarted = true;
         _percentTimer?.Stop();
 
-        var currentWidth = Math.Clamp(ProgressFill.ActualWidth, 0, ProgressTrackWidth);
-        var currentPercent = Math.Clamp(
-            (int)Math.Round(currentWidth / ProgressTrackWidth * 100.0),
-            0,
-            99);
-
-        ProgressFill.BeginAnimation(FrameworkElement.WidthProperty, null);
-        ProgressFill.Width = currentWidth;
-        ProgressFill.BeginAnimation(
-            FrameworkElement.WidthProperty,
-            new DoubleAnimation(currentWidth, ProgressTrackWidth,
-                TimeSpan.FromMilliseconds(StartupProgressProfile.CompletionDurationMs))
-            {
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
-                FillBehavior = FillBehavior.HoldEnd
-            },
-            HandoffBehavior.SnapshotAndReplace);
-
         StageText.Text = "Hazır. Program açılıyor...";
-        var started = Environment.TickCount64;
-        while (Environment.TickCount64 - started < StartupProgressProfile.CompletionDurationMs)
+        var currentPercent = _percent;
+        var completion = Stopwatch.StartNew();
+        while (completion.ElapsedMilliseconds < StartupProgressProfile.CompletionDurationMs)
         {
-            var ratio = Math.Clamp(
-                (Environment.TickCount64 - started) / (double)StartupProgressProfile.CompletionDurationMs,
-                0.0,
-                1.0);
-            var percent = currentPercent
-                          + (int)Math.Floor((100 - currentPercent) * ratio);
-            PercentText.Text = $"%{Math.Min(99, percent)}";
+            var ratio = completion.ElapsedMilliseconds / (double)StartupProgressProfile.CompletionDurationMs;
+            var percent = currentPercent + (int)Math.Floor((100 - currentPercent) * (1 - Math.Pow(1 - ratio, 3)));
+            SetProgress(Math.Min(99, percent));
             await Task.Delay(StartupProgressProfile.FrameDelayMs);
         }
 
-        PercentText.Text = "%100";
+        SetProgress(100);
         await Task.Delay(80);
         Close();
     }
